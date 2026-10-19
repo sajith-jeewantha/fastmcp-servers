@@ -1,0 +1,32 @@
+{
+  "name": "mcp-server-ts",
+  "version": "1.0.0",
+  "description": "A hotel discovery, stay-pricing, and reservation MCP server built with FastMCP and TypeScript.",
+  "engines": {
+    "node": ">=22.18.0"
+  },
+  "scripts": {
+    "test": "node --test test/*.test.ts",
+    "start": "node server.ts",
+    "client": "node client.ts"
+  },
+  "keywords": [
+    "mcp",
+    "mcp-server",
+    "model-context-protocol",
+    "fastmcp",
+    "typescript",
+    "ai",
+    "llm",
+    "tools",
+    "hotel-reservations",
+    "travel"
+  ],
+  "author": "",
+  "license": "MIT",
+  "type": "module",
+  "dependencies": {
+    "@prefecthq/fastmcp-ts": "^1.7.3",
+    "zod": "^4.6.7"
+  }
+}
