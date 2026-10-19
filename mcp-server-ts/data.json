@@ -1,0 +1,364 @@
+{
+  "hotels": [
+    {
+      "id": "cedar-house-seattle",
+      "name": "Cedar House Hotel",
+      "location": {
+        "city": "Seattle",
+        "country": "United States",
+        "address": "810 Pine Street, Seattle, WA"
+      },
+      "description": "A contemporary, locally inspired stay in the heart of downtown Seattle.",
+      "rating": 4.6,
+      "currency": "USD",
+      "taxRate": 0.12,
+      "facilities": ["Wi-Fi", "Restaurant", "Fitness center", "24-hour front desk"],
+      "rooms": [
+        {
+          "id": "cedar-house-queen",
+          "name": "City Queen Room",
+          "description": "A quiet room with a queen bed and views across downtown.",
+          "bedType": "1 queen bed",
+          "maxGuests": 2,
+          "pricePerNight": 189,
+          "inventory": 4,
+          "facilities": ["Wi-Fi", "Air conditioning", "Work desk", "Coffee maker"]
+        },
+        {
+          "id": "cedar-house-suite",
+          "name": "Rainier View Suite",
+          "description": "A spacious corner suite with a separate sitting area.",
+          "bedType": "1 king bed",
+          "maxGuests": 3,
+          "pricePerNight": 279,
+          "inventory": 2,
+          "facilities": ["Wi-Fi", "Air conditioning", "Work desk", "Coffee maker", "Sitting area"]
+        }
+      ]
+    },
+    {
+      "id": "harborlight-boston",
+      "name": "Harborlight Inn",
+      "location": {
+        "city": "Boston",
+        "country": "United States",
+        "address": "46 Atlantic Avenue, Boston, MA"
+      },
+      "description": "A welcoming boutique inn a short walk from Boston Harbor and the historic North End.",
+      "rating": 4.5,
+      "currency": "USD",
+      "taxRate": 0.12,
+      "facilities": ["Wi-Fi", "Breakfast", "Concierge", "Luggage storage"],
+      "rooms": [
+        {
+          "id": "harborlight-classic",
+          "name": "Classic Double Room",
+          "description": "A thoughtfully furnished room close to the harbor.",
+          "bedType": "1 double bed",
+          "maxGuests": 2,
+          "pricePerNight": 205,
+          "inventory": 3,
+          "facilities": ["Wi-Fi", "Air conditioning", "Mini fridge", "Blackout curtains"]
+        },
+        {
+          "id": "harborlight-family",
+          "name": "Family Harbor Room",
+          "description": "A larger harbor-side room with flexible sleeping space for families.",
+          "bedType": "2 queen beds",
+          "maxGuests": 4,
+          "pricePerNight": 295,
+          "inventory": 2,
+          "facilities": ["Wi-Fi", "Air conditioning", "Mini fridge", "Sofa", "Harbor view"]
+        }
+      ]
+    },
+    {
+      "id": "juniper-lodge-vancouver",
+      "name": "Juniper Lodge",
+      "location": {
+        "city": "Vancouver",
+        "country": "Canada",
+        "address": "1228 Robson Street, Vancouver, BC"
+      },
+      "description": "A relaxed urban lodge close to Stanley Park, shopping, and the waterfront.",
+      "rating": 4.7,
+      "currency": "USD",
+      "taxRate": 0.12,
+      "facilities": ["Wi-Fi", "Restaurant", "Bicycle rental", "Fitness center"],
+      "rooms": [
+        {
+          "id": "juniper-queen",
+          "name": "Parkside Queen Room",
+          "description": "A bright room with a comfortable queen bed and a neighborhood outlook.",
+          "bedType": "1 queen bed",
+          "maxGuests": 2,
+          "pricePerNight": 174,
+          "inventory": 5,
+          "facilities": ["Wi-Fi", "Air conditioning", "Tea and coffee", "Work desk"]
+        },
+        {
+          "id": "juniper-family",
+          "name": "Lodge Family Suite",
+          "description": "A family-friendly suite with a separate lounge and extra storage.",
+          "bedType": "1 king bed and 1 sofa bed",
+          "maxGuests": 4,
+          "pricePerNight": 258,
+          "inventory": 2,
+          "facilities": ["Wi-Fi", "Air conditioning", "Tea and coffee", "Lounge", "Kitchenette"]
+        }
+      ]
+    },
+    {
+      "id": "casa-sol-lisbon",
+      "name": "Casa do Sol",
+      "location": {
+        "city": "Lisbon",
+        "country": "Portugal",
+        "address": "18 Rua da Madalena, Lisbon"
+      },
+      "description": "A sunlit guesthouse in the old town, surrounded by cafes and tram routes.",
+      "rating": 4.8,
+      "currency": "USD",
+      "taxRate": 0.12,
+      "facilities": ["Wi-Fi", "Breakfast", "Rooftop terrace", "Airport shuttle"],
+      "rooms": [
+        {
+          "id": "casa-sol-double",
+          "name": "Alfama Double Room",
+          "description": "A calm double room with traditional details and modern comforts.",
+          "bedType": "1 double bed",
+          "maxGuests": 2,
+          "pricePerNight": 142,
+          "inventory": 3,
+          "facilities": ["Wi-Fi", "Air conditioning", "Tea and coffee", "Ensuite bathroom"]
+        },
+        {
+          "id": "casa-sol-terrace",
+          "name": "Terrace Suite",
+          "description": "A generous suite opening onto a private terrace.",
+          "bedType": "1 king bed",
+          "maxGuests": 3,
+          "pricePerNight": 218,
+          "inventory": 2,
+          "facilities": ["Wi-Fi", "Air conditioning", "Tea and coffee", "Private terrace", "Lounge"]
+        }
+      ]
+    },
+    {
+      "id": "blue-door-kyoto",
+      "name": "The Blue Door Kyoto",
+      "location": {
+        "city": "Kyoto",
+        "country": "Japan",
+        "address": "312 Nishikiyamachi, Nakagyo Ward, Kyoto"
+      },
+      "description": "A peaceful modern ryokan-inspired retreat near the Kamo River.",
+      "rating": 4.9,
+      "currency": "USD",
+      "taxRate": 0.12,
+      "facilities": ["Wi-Fi", "Garden", "Onsen bath", "Tea lounge"],
+      "rooms": [
+        {
+          "id": "blue-door-compact",
+          "name": "Garden Compact Room",
+          "description": "A serene, efficient room overlooking the courtyard garden.",
+          "bedType": "1 double bed",
+          "maxGuests": 2,
+          "pricePerNight": 156,
+          "inventory": 4,
+          "facilities": ["Wi-Fi", "Air conditioning", "Tea set", "Garden view"]
+        },
+        {
+          "id": "blue-door-machiya",
+          "name": "Machiya Family Room",
+          "description": "A larger Japanese-style room with tatami seating and garden access.",
+          "bedType": "2 futon beds",
+          "maxGuests": 3,
+          "pricePerNight": 236,
+          "inventory": 2,
+          "facilities": ["Wi-Fi", "Air conditioning", "Tea set", "Tatami seating", "Garden access"]
+        }
+      ]
+    },
+    {
+      "id": "olive-grove-florence",
+      "name": "Olive Grove Palazzo",
+      "location": {
+        "city": "Florence",
+        "country": "Italy",
+        "address": "7 Via dei Neri, Florence"
+      },
+      "description": "A restored palazzo offering an intimate stay near the Arno and Uffizi Gallery.",
+      "rating": 4.7,
+      "currency": "USD",
+      "taxRate": 0.12,
+      "facilities": ["Wi-Fi", "Breakfast", "Courtyard", "Concierge"],
+      "rooms": [
+        {
+          "id": "olive-grove-classic",
+          "name": "Palazzo Classic Room",
+          "description": "A characterful room with original architectural details.",
+          "bedType": "1 queen bed",
+          "maxGuests": 2,
+          "pricePerNight": 198,
+          "inventory": 3,
+          "facilities": ["Wi-Fi", "Air conditioning", "Minibar", "Ensuite bathroom"]
+        },
+        {
+          "id": "olive-grove-family",
+          "name": "Arno Family Suite",
+          "description": "A family suite with a separate sleeping area and city views.",
+          "bedType": "1 king bed and 1 sofa bed",
+          "maxGuests": 4,
+          "pricePerNight": 312,
+          "inventory": 2,
+          "facilities": ["Wi-Fi", "Air conditioning", "Minibar", "Separate lounge", "City view"]
+        }
+      ]
+    },
+    {
+      "id": "sandstone-dubai",
+      "name": "Sandstone Marina Hotel",
+      "location": {
+        "city": "Dubai",
+        "country": "United Arab Emirates",
+        "address": "22 Marina Walk, Dubai"
+      },
+      "description": "A modern waterfront hotel with easy access to the marina promenade.",
+      "rating": 4.6,
+      "currency": "USD",
+      "taxRate": 0.12,
+      "facilities": ["Wi-Fi", "Pool", "Restaurant", "Fitness center", "Valet parking"],
+      "rooms": [
+        {
+          "id": "sandstone-marina",
+          "name": "Marina View King",
+          "description": "A king room with floor-to-ceiling marina views.",
+          "bedType": "1 king bed",
+          "maxGuests": 2,
+          "pricePerNight": 224,
+          "inventory": 4,
+          "facilities": ["Wi-Fi", "Air conditioning", "Marina view", "Work desk"]
+        },
+        {
+          "id": "sandstone-residence",
+          "name": "One-Bedroom Residence",
+          "description": "An apartment-style suite with a full living room and kitchenette.",
+          "bedType": "1 king bed and 1 sofa bed",
+          "maxGuests": 4,
+          "pricePerNight": 348,
+          "inventory": 2,
+          "facilities": ["Wi-Fi", "Air conditioning", "Kitchenette", "Living room", "Balcony"]
+        }
+      ]
+    },
+    {
+      "id": "lagoon-garden-singapore",
+      "name": "Lagoon Garden Hotel",
+      "location": {
+        "city": "Singapore",
+        "country": "Singapore",
+        "address": "9 Marina View, Singapore"
+      },
+      "description": "A garden-inspired city hotel with convenient transport and dining nearby.",
+      "rating": 4.5,
+      "currency": "USD",
+      "taxRate": 0.12,
+      "facilities": ["Wi-Fi", "Pool", "Restaurant", "Garden", "Laundry"],
+      "rooms": [
+        {
+          "id": "lagoon-garden-deluxe",
+          "name": "Garden Deluxe Room",
+          "description": "A polished deluxe room with views of the landscaped garden.",
+          "bedType": "1 queen bed",
+          "maxGuests": 2,
+          "pricePerNight": 212,
+          "inventory": 4,
+          "facilities": ["Wi-Fi", "Air conditioning", "Garden view", "Mini fridge"]
+        },
+        {
+          "id": "lagoon-garden-family",
+          "name": "Family Pool Suite",
+          "description": "A spacious suite with additional sleeping space and pool access.",
+          "bedType": "1 king bed and 1 sofa bed",
+          "maxGuests": 4,
+          "pricePerNight": 326,
+          "inventory": 2,
+          "facilities": ["Wi-Fi", "Air conditioning", "Pool access", "Lounge", "Mini fridge"]
+        }
+      ]
+    },
+    {
+      "id": "copper-pine-denver",
+      "name": "Copper Pine Hotel",
+      "location": {
+        "city": "Denver",
+        "country": "United States",
+        "address": "1700 Wewatta Street, Denver, CO"
+      },
+      "description": "A comfortable base for downtown dining, business, and nearby mountain trips.",
+      "rating": 4.4,
+      "currency": "USD",
+      "taxRate": 0.12,
+      "facilities": ["Wi-Fi", "Restaurant", "Fitness center", "Parking", "Pet-friendly"],
+      "rooms": [
+        {
+          "id": "copper-pine-queen",
+          "name": "Front Range Queen Room",
+          "description": "A practical, comfortable room with room to work and unwind.",
+          "bedType": "1 queen bed",
+          "maxGuests": 2,
+          "pricePerNight": 167,
+          "inventory": 5,
+          "facilities": ["Wi-Fi", "Air conditioning", "Work desk", "Coffee maker"]
+        },
+        {
+          "id": "copper-pine-loft",
+          "name": "Copper Loft Suite",
+          "description": "A loft-style suite with a separate lounge and mountain-facing windows.",
+          "bedType": "1 king bed and 1 sofa bed",
+          "maxGuests": 4,
+          "pricePerNight": 254,
+          "inventory": 2,
+          "facilities": ["Wi-Fi", "Air conditioning", "Lounge", "Mountain view", "Mini fridge"]
+        }
+      ]
+    },
+    {
+      "id": "coastline-sydney",
+      "name": "Coastline House",
+      "location": {
+        "city": "Sydney",
+        "country": "Australia",
+        "address": "40 Barangaroo Avenue, Sydney"
+      },
+      "description": "A coastal-inspired stay near the harbor, ferry terminals, and city attractions.",
+      "rating": 4.8,
+      "currency": "USD",
+      "taxRate": 0.12,
+      "facilities": ["Wi-Fi", "Restaurant", "Harbor terrace", "Fitness center"],
+      "rooms": [
+        {
+          "id": "coastline-harbor",
+          "name": "Harbor Queen Room",
+          "description": "A bright queen room with a view toward the working harbor.",
+          "bedType": "1 queen bed",
+          "maxGuests": 2,
+          "pricePerNight": 231,
+          "inventory": 3,
+          "facilities": ["Wi-Fi", "Air conditioning", "Harbor view", "Tea and coffee"]
+        },
+        {
+          "id": "coastline-family",
+          "name": "Coastline Family Suite",
+          "description": "A generous family suite with a separate lounge and harbor outlook.",
+          "bedType": "2 queen beds",
+          "maxGuests": 4,
+          "pricePerNight": 359,
+          "inventory": 2,
+          "facilities": ["Wi-Fi", "Air conditioning", "Harbor view", "Separate lounge", "Balcony"]
+        }
+      ]
+    }
+  ]
+}
