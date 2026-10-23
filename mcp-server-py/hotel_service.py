@@ -25,7 +25,7 @@ class HotelReservationService:
         reservations_path: Path | None = None,
     ) -> None:
         project_directory = Path(__file__).resolve().parent
-        self.catalog_path = catalog_path or project_directory / "data.json"
+        self.catalog_path = catalog_path or project_directory.parent / "data.json"
         self.reservations_path = reservations_path or Path(
             os.environ.get(
                 "HOTEL_RESERVATIONS_FILE",

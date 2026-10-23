@@ -48,7 +48,7 @@ Reservation guest details are not exposed through resources.
 
 ## Data and tests
 
-Edit `data.json` to change the sample properties and room offers. New bookings are stored in `reservations.json` (or the path set by `HOTEL_RESERVATIONS_FILE`).
+Edit `../data.json` in the repository root to change the catalog shared by both servers. New bookings are stored in `reservations.json` in this project directory (or the path set by `HOTEL_RESERVATIONS_FILE`).
 
 Run the MCP client integration tests with:
 
