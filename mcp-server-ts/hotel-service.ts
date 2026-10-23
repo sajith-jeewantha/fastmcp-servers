@@ -106,7 +106,7 @@ export type StayQuote = {
 }
 
 const projectDirectory = dirname(fileURLToPath(import.meta.url))
-const catalogPath = join(projectDirectory, 'data.json')
+const catalogPath = join(projectDirectory, '..', 'data.json')
 
 function isCalendarDate(value: string): boolean {
   if (!/^\d{4}-\d{2}-\d{2}$/.test(value)) return false

@@ -1,6 +1,6 @@
 # Hotel Reservations MCP Server (Python)
 
-A hotel discovery and reservation server built with Python and FastMCP. It shares the TypeScript project's catalog of 10 fictional hotels and 20 room offers.
+A hotel discovery and reservation server built with Python and FastMCP. It uses the shared repository-root catalog of 10 fictional hotels and 20 room offers.
 
 ## Requirements
 
@@ -53,7 +53,7 @@ All stay dates use `YYYY-MM-DD`; check-out is exclusive, and check-in for search
 - `hotel://room/{roomId}` provides details for one room offer.
 - `plan_hotel_stay` guides an assistant through availability search, estimate comparison, and guest confirmation before booking.
 
-Reservation guest details are not exposed through resources. Bookings are stored in `reservations.json` (or at the path set by `HOTEL_RESERVATIONS_FILE`).
+Reservation guest details are not exposed through resources. Bookings are stored in `reservations.json` in this project directory (or at the path set by `HOTEL_RESERVATIONS_FILE`). Edit `../data.json` in the repository root to change the shared catalog.
 
 ## Tests
 

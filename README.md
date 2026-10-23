@@ -4,6 +4,8 @@ This repository contains TypeScript and Python hotel discovery and reservation M
 
 Both implementations provide hotel search, stay-price estimates, room booking, hotel and room resources, and a trip-planning prompt. They use the same sample catalog of 10 hotels and 20 room offers.
 
+The shared catalog is stored in the repository-root [`data.json`](./data.json) and loaded by both servers.
+
 ## TypeScript server
 
 The TypeScript implementation and its tests are in [`mcp-server-ts/`](./mcp-server-ts/). See [`mcp-server-ts/README.md`](./mcp-server-ts/README.md) for details.
