@@ -1,3 +1,4 @@
+import argparse
 import json
 import os
 
@@ -98,7 +99,29 @@ def create_server(service: HotelReservationService | None = None) -> FastMCP:
 
 mcp = create_server()
 
+
+def parse_server_options() -> argparse.Namespace:
+    parser = argparse.ArgumentParser(description="Run the hotel reservations MCP server.")
+    default_transport = os.environ.get("MCP_TRANSPORT", "stdio")
+    if default_transport not in ("stdio", "http"):
+        parser.error('MCP_TRANSPORT must be either "stdio" or "http".')
+    parser.add_argument(
+        "--transport",
+        choices=("stdio", "http"),
+        default=default_transport,
+    )
+    parser.add_argument(
+        "--port",
+        type=int,
+        default=int(os.environ.get("MCP_PORT", "3001")),
+    )
+    return parser.parse_args()
+
+
 if __name__ == "__main__":
-    port = int(os.environ.get("MCP_PORT", "3001"))
-    host = os.environ.get("MCP_HOST", "127.0.0.1")
-    mcp.run(transport="http", host=host, port=port, path="/mcp")
+    arguments = parse_server_options()
+    if arguments.transport == "stdio":
+        mcp.run(transport="stdio")
+    else:
+        host = os.environ.get("MCP_HOST", "127.0.0.1")
+        mcp.run(transport="http", host=host, port=arguments.port, path="/mcp")

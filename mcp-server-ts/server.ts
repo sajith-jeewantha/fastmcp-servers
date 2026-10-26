@@ -107,19 +107,55 @@ server.prompt(
     ],
   },
   ({ city, checkIn, checkOut, guests, preferences }) =>
-    `Help plan a hotel stay in ${city} from ${checkIn} through ${checkOut} for ${guests} guest(s). ${
-      preferences ? `Preferences: ${preferences}. ` : ''
+    `Help plan a hotel stay in ${city} from ${checkIn} through ${checkOut} for ${guests} guest(s). ${preferences ? `Preferences: ${preferences}. ` : ''
     }Use search_hotels to find available rooms, then calculate_stay_price for comparable all-in estimates. Explain that taxes are estimates and present the total and nightly rate. Ask the guest to choose an option and provide their name and email before calling book_room. Never claim a reservation is confirmed until book_room succeeds.`,
 )
 
-const port = Number(process.env.MCP_PORT ?? 3000)
-if (!Number.isInteger(port) || port < 1 || port > 65535) {
-  throw new Error(`Invalid MCP_PORT "${process.env.MCP_PORT}". Expected an integer from 1 to 65535.`)
+type Transport = 'stdio' | 'http'
+
+function parseServerOptions(): { transport: Transport; port: number } {
+  let transport = process.env.MCP_TRANSPORT ?? 'stdio'
+  let port = Number(process.env.MCP_PORT ?? 3000)
+
+  for (let index = 2; index < process.argv.length; index += 1) {
+    const argument = process.argv[index]
+    if (argument === '--transport' || argument === '--port') {
+      const value = process.argv[index + 1]
+      if (!value || value.startsWith('--')) {
+        throw new Error(`Expected a value after ${argument}.`)
+      }
+      if (argument === '--transport') transport = value
+      else port = Number(value)
+      index += 1
+    } else if (argument?.startsWith('--transport=')) {
+      transport = argument.slice('--transport='.length)
+    } else if (argument?.startsWith('--port=')) {
+      port = Number(argument.slice('--port='.length))
+    } else {
+      throw new Error(`Unknown server option "${argument}".`)
+    }
+  }
+
+  if (transport !== 'stdio' && transport !== 'http') {
+    throw new Error(`Invalid MCP transport "${transport}". Expected "stdio" or "http".`)
+  }
+  if (
+    transport === 'http' &&
+    (!Number.isInteger(port) || port < 1 || port > 65535)
+  ) {
+    throw new Error(`Invalid MCP port "${port}". Expected an integer from 1 to 65535.`)
+  }
+  return { transport, port }
 }
 
-await server.run({
-  transport: 'http',
-  host: process.env.MCP_HOST ?? '127.0.0.1',
-  port,
-  path: '/mcp',
-})
+const { transport, port } = parseServerOptions()
+if (transport === 'stdio') {
+  await server.run({ transport })
+} else {
+  await server.run({
+    transport,
+    host: process.env.MCP_HOST ?? '127.0.0.1',
+    port,
+    path: '/mcp',
+  })
+}

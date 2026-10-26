@@ -21,21 +21,27 @@ On Windows, activate the environment with `.venv\Scripts\activate`.
 
 ## Run
 
-Start the HTTP MCP server:
+Start the MCP server with stdio (the default), suitable for an MCP host that launches the process:
 
 ```sh
 python server.py
 ```
 
-The server listens at `http://127.0.0.1:3001/mcp`. Override the port with `MCP_PORT`, the bind address with `MCP_HOST`, or the reservation file location with `HOTEL_RESERVATIONS_FILE`.
+To run over HTTP on port 3001:
 
-In another terminal, run the read-only example client:
+```sh
+python server.py --transport http --port 3001
+```
+
+HTTP listens at `http://127.0.0.1:3001/mcp` by default. The transport and port can also be set with `MCP_TRANSPORT` and `MCP_PORT`; configure the bind address with `MCP_HOST` or the reservation file location with `HOTEL_RESERVATIONS_FILE`.
+
+The read-only example client connects to HTTP by default. To have it start a local stdio server instead, set `MCP_TRANSPORT=stdio`:
 
 ```sh
 python client.py
 ```
 
-Set `MCP_URL` to connect the example client to a different server URL.
+Set `MCP_URL` to connect the HTTP client to a different server URL.
 
 ## MCP capabilities
 
@@ -63,4 +69,4 @@ Run the isolated MCP integration tests with:
 python -m unittest discover -s tests -v
 ```
 
-The tests use a temporary reservation file and do not modify local booking data.
+The tests cover the in-memory service, HTTP transport, and stdio transport using temporary reservation files; they do not modify local booking data.
