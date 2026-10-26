@@ -7,7 +7,7 @@ import { tmpdir } from 'node:os'
 import { dirname, join } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { after, before, test } from 'node:test'
-import { Client } from '@prefecthq/fastmcp-ts/client'
+import { Client, StdioTransport } from '@prefecthq/fastmcp-ts/client'
 
 const projectDirectory = dirname(dirname(fileURLToPath(import.meta.url)))
 const roomId = 'casa-sol-double'
@@ -79,12 +79,11 @@ before(async () => {
 
   const port = await findAvailablePort()
   serverUrl = `http://127.0.0.1:${port}/mcp`
-  serverProcess = spawn(process.execPath, ['server.ts'], {
+  serverProcess = spawn(process.execPath, ['server.ts', '--transport', 'http', '--port', String(port)], {
     cwd: projectDirectory,
     env: {
       ...process.env,
       MCP_HOST: '127.0.0.1',
-      MCP_PORT: String(port),
       HOTEL_RESERVATIONS_FILE: reservationFile,
     },
     stdio: ['ignore', 'pipe', 'pipe'],
@@ -113,6 +112,27 @@ after(async () => {
 test('publishes hotel search, pricing, and booking tools', async () => {
   const names = (await client.listTools()).map((tool) => tool.name)
   assert.deepEqual(names.sort(), ['book_room', 'calculate_stay_price', 'search_hotels'])
+})
+
+test('uses stdio by default', async () => {
+  const stdioClient = await Client.connect(
+    new StdioTransport(process.execPath, ['server.ts'], {
+      cwd: projectDirectory,
+      env: {
+        ...Object.fromEntries(
+          Object.entries(process.env).filter((entry): entry is [string, string] => entry[1] !== undefined),
+        ),
+        HOTEL_RESERVATIONS_FILE: reservationFile,
+      },
+    }),
+  )
+
+  try {
+    const names = (await stdioClient.listTools()).map((tool) => tool.name)
+    assert.deepEqual(names.sort(), ['book_room', 'calculate_stay_price', 'search_hotels'])
+  } finally {
+    await stdioClient.close()
+  }
 })
 
 test('searches rooms by city, dates, capacity, and facilities', async () => {

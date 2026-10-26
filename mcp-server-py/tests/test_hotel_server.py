@@ -1,10 +1,14 @@
 import asyncio
 import json
+import os
+import socket
+import sys
 import tempfile
 import unittest
 from pathlib import Path
 
 from fastmcp import Client
+from fastmcp.client.transports import StdioTransport
 
 from hotel_service import HotelReservationService
 from server import create_server
@@ -18,8 +22,8 @@ ROOM_ID = "casa-sol-double"
 class HotelServerTests(unittest.IsolatedAsyncioTestCase):
     async def asyncSetUp(self) -> None:
         self.temporary_directory = tempfile.TemporaryDirectory()
-        reservation_path = Path(self.temporary_directory.name) / "reservations.json"
-        self.service = HotelReservationService(reservations_path=reservation_path)
+        self.reservation_path = Path(self.temporary_directory.name) / "reservations.json"
+        self.service = HotelReservationService(reservations_path=self.reservation_path)
         self.server = create_server(self.service)
         self.client = await self.enterAsyncContext(Client(self.server))
 
@@ -38,6 +42,72 @@ class HotelServerTests(unittest.IsolatedAsyncioTestCase):
             {tool.name for tool in tools},
             {"search_hotels", "calculate_stay_price", "book_room"},
         )
+
+    async def test_uses_stdio_by_default(self) -> None:
+        project_directory = Path(__file__).resolve().parents[1]
+        transport = StdioTransport(
+            command=sys.executable,
+            args=["server.py"],
+            env={
+                **os.environ,
+                "HOTEL_RESERVATIONS_FILE": str(self.reservation_path),
+            },
+            cwd=str(project_directory),
+        )
+        async with Client(transport) as client:
+            tools = await client.list_tools()
+        self.assertEqual(
+            {tool.name for tool in tools},
+            {"search_hotels", "calculate_stay_price", "book_room"},
+        )
+
+    async def test_serves_mcp_over_http_when_selected(self) -> None:
+        project_directory = Path(__file__).resolve().parents[1]
+        with socket.socket() as port_socket:
+            port_socket.bind(("127.0.0.1", 0))
+            port = port_socket.getsockname()[1]
+
+        process = await asyncio.create_subprocess_exec(
+            sys.executable,
+            "server.py",
+            "--transport",
+            "http",
+            "--port",
+            str(port),
+            cwd=project_directory,
+            env={
+                **os.environ,
+                "HOTEL_RESERVATIONS_FILE": str(self.reservation_path),
+                "MCP_HOST": "127.0.0.1",
+            },
+            stdout=asyncio.subprocess.DEVNULL,
+            stderr=asyncio.subprocess.DEVNULL,
+        )
+        try:
+            for _ in range(100):
+                if process.returncode is not None:
+                    self.fail(f"HTTP MCP server exited during startup ({process.returncode}).")
+                try:
+                    _, writer = await asyncio.open_connection("127.0.0.1", port)
+                except OSError:
+                    await asyncio.sleep(0.1)
+                else:
+                    writer.close()
+                    await writer.wait_closed()
+                    break
+            else:
+                self.fail("Timed out waiting for HTTP MCP server startup.")
+
+            async with Client(f"http://127.0.0.1:{port}/mcp") as client:
+                tools = await client.list_tools()
+            self.assertEqual(
+                {tool.name for tool in tools},
+                {"search_hotels", "calculate_stay_price", "book_room"},
+            )
+        finally:
+            if process.returncode is None:
+                process.terminate()
+                await asyncio.wait_for(process.wait(), timeout=5)
 
     async def test_searches_by_city_dates_capacity_and_facilities(self) -> None:
         result = self._tool_json(

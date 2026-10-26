@@ -9,21 +9,27 @@ A sample hotel discovery and reservation server built with TypeScript, FastMCP, 
 
 ## Run
 
-Start the HTTP MCP server:
+Start the MCP server with stdio (the default), suitable for an MCP host that launches the process:
 
 ```sh
 npm start
 ```
 
-The server listens on `http://127.0.0.1:3000/mcp`. Override the port with `MCP_PORT`, the bind address with `MCP_HOST`, or the reservation file location with `HOTEL_RESERVATIONS_FILE`.
+To run over HTTP on port 3000:
 
-In another terminal, run the read-only example client:
+```sh
+npm start -- --transport http --port 3000
+```
+
+HTTP listens at `http://127.0.0.1:3000/mcp`. The transport and port can also be set with `MCP_TRANSPORT` and `MCP_PORT`; configure the bind address with `MCP_HOST` or the reservation file location with `HOTEL_RESERVATIONS_FILE`.
+
+The read-only example client connects to HTTP by default. To have it start a local stdio server instead, set `MCP_TRANSPORT=stdio`:
 
 ```sh
 npm run client
 ```
 
-Set `MCP_URL` to connect the example client to a different server URL.
+Set `MCP_URL` to connect the HTTP client to a different server URL.
 
 ## MCP capabilities
 
@@ -50,7 +56,7 @@ Reservation guest details are not exposed through resources.
 
 Edit `../data.json` in the repository root to change the catalog shared by both servers. New bookings are stored in `reservations.json` in this project directory (or the path set by `HOTEL_RESERVATIONS_FILE`).
 
-Run the MCP client integration tests with:
+Run the MCP client integration tests for both HTTP and stdio with:
 
 ```sh
 npm test

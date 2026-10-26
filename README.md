@@ -25,6 +25,10 @@ npm test
 
 To start the server locally, run `npm start` from `mcp-server-ts/`.
 
+## Server transports
+
+Both servers support `stdio` and Streamable HTTP. They default to `stdio`, suitable for MCP hosts that launch the process. Select HTTP explicitly with `npm start -- --transport http --port 3000` for TypeScript or `python server.py --transport http --port 3001` for Python. Both use the `/mcp` path by default.
+
 ## Python server
 
 The Python implementation and its tests are in [`mcp-server-py/`](./mcp-server-py/). See [`mcp-server-py/README.md`](./mcp-server-py/README.md) for installation and usage.
